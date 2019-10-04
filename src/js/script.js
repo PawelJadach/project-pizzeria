@@ -81,6 +81,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cardButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -143,12 +144,23 @@
             price += option.price;
           } else if(!optionSelected && option.default){
             price -= option.price;
+            
+          }
+          
+          const images = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+          
+          for (let image of images) {
+            if (optionSelected) {
+              image.classList.add(classNames.menuProduct.imageVisible);
+            } else {
+              image.classList.remove(classNames.menuProduct.imageVisible);
+            }
           }
         }
       }
 
 
-      console.log(price);
+      //console.log(price);
       thisProduct.priceElem.innerHTML = price;
       
     }
