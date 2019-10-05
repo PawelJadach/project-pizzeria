@@ -217,9 +217,11 @@
 
     addToCart(){
       const thisProduct = this;
+
       thisProduct.name = thisProduct.data.name;
       thisProduct.amount = thisProduct.amountWidget.value;
       app.cart.add(thisProduct);
+      
     }
   }
 
@@ -320,6 +322,33 @@
     }
   }
 
+  class CartProduct {
+    constructor(menuProduct, element){
+      const thisCartProduct = this;
+      console.log(menuProduct);
+      thisCartProduct.id = menuProduct.id;
+      thisCartProduct.name = menuProduct.name;
+      thisCartProduct.price = menuProduct.price;
+      thisCartProduct.priceSingle = menuProduct.priceSingle;
+      thisCartProduct.amount = menuProduct.amount;
+      thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
+
+      thisCartProduct.getElements(element);
+      console.log(thisCartProduct);
+    }
+
+    getElements(element){
+      const thisCartProduct = this;
+      thisCartProduct.dom = {};
+      thisCartProduct.dom.wrapper = element;
+      thisCartProduct.dom.amountWidget = thisCartProduct.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.price = thisCartProduct.querySelector(select.cartProduct.price);
+      thisCartProduct.dom.edit = thisCartProduct.querySelector(select.cartProduct.edit);
+      thisCartProduct.dom.remove = thisCartProduct.querySelector(select.cartProduct.remove);
+
+    }
+  }
+
   const app = {
     initMenu: function(){
       const thisApp = this;
@@ -336,11 +365,6 @@
     },
     init: function(){
       const thisApp = this;
-      // console.log('*** App starting ***');
-      // console.log('thisApp:', thisApp);
-      // console.log('classNames:', classNames);
-      // console.log('settings:', settings);
-      // console.log('templates:', templates);
       thisApp.initData();
       thisApp.initMenu();
       thisApp.initCart();
@@ -349,7 +373,8 @@
       const thisApp = this;
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
-    }
+    },
+    
   };
 
   app.init();
