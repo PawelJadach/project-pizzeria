@@ -168,7 +168,9 @@
         const param = params[paramId];
 
         for(let optionId in param.options){
+          
           const option = param.options[optionId];
+          /* eslint-disable */
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
           //console.log(option);
           if(optionSelected && !option.default){
