@@ -322,8 +322,9 @@
       //console.log('adding product', menuProduct);
       const generatedHTML = templates.cartProduct(menuProduct);
       // console.log(this);
-      thisCart.products.push(new CartProduct(menuProduct, generatedHTML));
       thisCart.element = utils.createDOMFromHTML(generatedHTML);
+      thisCart.products.push(new CartProduct(menuProduct, thisCart.element));
+      
       const cartContainer = document.querySelector(select.containerOf.cart);
       cartContainer.appendChild(thisCart.element);
     }
