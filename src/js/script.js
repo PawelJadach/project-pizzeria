@@ -344,10 +344,10 @@
 
     getElements(element){
       const thisCartProduct = this;
-      console.log(element);
+      //console.log(element);
       thisCartProduct.dom = {};
       thisCartProduct.dom.wrapper = element;
-      console.log(thisCartProduct.dom.wrapper);
+      //console.log(thisCartProduct.dom.wrapper);
       thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
       thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
