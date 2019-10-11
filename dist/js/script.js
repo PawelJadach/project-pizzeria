@@ -319,6 +319,7 @@
       
       //console.log('adding product', menuProduct);
       const generatedHTML = templates.cartProduct(menuProduct);
+      // console.log(this);
       thisCart.products.push(new CartProduct(menuProduct, generatedHTML));
       thisCart.element = utils.createDOMFromHTML(generatedHTML);
       const cartContainer = document.querySelector(select.containerOf.cart);
@@ -343,25 +344,28 @@
 
     getElements(element){
       const thisCartProduct = this;
-      //console.log(element);
+      console.log(element);
       thisCartProduct.dom = {};
       thisCartProduct.dom.wrapper = element;
-      thisCartProduct.dom.amountWidget = document.querySelector(select.cartProduct.amountWidget);
-      thisCartProduct.dom.price = document.querySelector(select.cartProduct.price);
-      thisCartProduct.dom.edit = document.querySelector(select.cartProduct.edit);
-      thisCartProduct.dom.remove = document.querySelector(select.cartProduct.remove);
+      console.log(thisCartProduct.dom.wrapper);
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
+      thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
+      thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
 
     }
 
     initAmountWidget(){
       const thisCartProduct = this;
-      //console.log(thisCartProduct.dom.amountWidget);
+      console.log(thisCartProduct.dom.amountWidget);
+      
       thisCartProduct.amountWidget = new amountWidget(thisCartProduct.dom.amountWidget);
+      
       thisCartProduct.amountWidget.element.addEventListener('updated', function(){
-        console.log('działa');
+        //console.log(thisCartProduct.dom.price.innerT);
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
-        //thisCartProduct.price.innerHTML(thisCartProduct.price);
+        thisCartProduct.dom.price.innerText = thisCartProduct.price;
       });
     }
   }
