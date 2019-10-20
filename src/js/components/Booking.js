@@ -1,4 +1,4 @@
-import {templates, select} from '../settings.js';
+import {templates, select, settings} from '../settings.js';
 import AmountWidget from './AmountWidget.js';
 import utils from '../utils.js';
 import DatePicker from './DatePicker.js';
@@ -10,6 +10,7 @@ class Booking {
     
     thisBooking.render(element);
     thisBooking.initWidgets();
+    thisBooking.getData();
   }
 
   render(element){
@@ -34,6 +35,56 @@ class Booking {
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+  }
+
+  getData(){
+    const startDayParam = settings.db.dateStartParamKey + '=' + utils.dateToStr(this.datePicker.minDate);
+    const endDateParam = settings.db.dateEndParamKey + '=' + utils.dateToStr(this.datePicker.maxDate);
+
+    const params = {
+      booking: [
+        startDayParam,
+        endDateParam,
+      ],
+      eventsCurrent: [
+        settings.db.notRepeatParam,
+        startDayParam,
+        endDateParam,
+      ],
+      eventsRepeat: [
+        settings.db.repeatParam,
+        endDateParam,
+      ],  
+    };
+    //console.log(params);
+    const urls = {
+      booking:       settings.db.url + '/' + settings.db.booking + '?' + params.booking.join('&'),
+      eventsCurrent: settings.db.url + '/' + settings.db.event + '?' + params.eventsCurrent.join('&') ,
+      eventsRepeat:  settings.db.url + '/' + settings.db.event + '?' + params.eventsRepeat.join('&'),
+    };
+
+    Promise.all([
+      fetch(urls.booking),
+      fetch(urls.eventsCurrent),
+      fetch(urls.eventsRepeat)
+    ])
+      .then(function(res){
+        const bookingRes = res[0];
+        const eventsCurrentRes = res[1];
+        const eventsRepeatRes = res[2];
+        return Promise.all([
+          bookingRes.json(),
+          eventsCurrentRes.json(),
+          eventsRepeatRes.json(),
+        ]);
+      })
+      .then(function([bookingRes, eventsCurrentRes, eventsRepeatRes]){
+        console.log(bookingRes);
+        console.log(eventsCurrentRes);
+        console.log(eventsRepeatRes);
+      });
+    
+    
   }
 }
 
