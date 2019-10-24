@@ -46,6 +46,7 @@ class Booking {
   }
 
   getData() {
+    const thisBooking = this;
     const startDayParam =
       settings.db.dateStartParamKey +
       '=' +
@@ -101,6 +102,8 @@ class Booking {
         // console.log(bookingRes);
         // console.log(eventsCurrentRes);
         // console.log(eventsRepeatRes);
+
+        thisBooking.parseData(bookingRes, eventsCurrentRes, eventsRepeatRes);
       });
   }
 
