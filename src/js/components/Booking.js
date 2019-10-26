@@ -174,11 +174,11 @@ class Booking {
 
   updateDOM() {
     const thisBooking = this;
-    console.log(thisBooking.datePicker);
+    //console.log(thisBooking.datePicker);
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
-    console.log('thisBooking.hour', thisBooking.hour);
-    console.log('thisBooking.date', thisBooking.date);
+    //console.log('thisBooking.hour', thisBooking.hour);
+
     let allAvailable = false;
 
     if (
@@ -200,7 +200,7 @@ class Booking {
         !allAvailable &&
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
       ) {
-        console.log('daje');
+        //console.log('daje');
         table.classList.add(classNames.booking.tableBooked);
       } else {
         //console.log('zabieram');

@@ -6,13 +6,14 @@ import { settings, select } from '../settings.js';
 
 class DatePicker extends BaseWidget {
   constructor(wrapper) {
-    super(wrapper);
+    super(wrapper, utils.dateToStr(new Date()));
     const thisWidget = this;
     utils.dateToStr(new Date());
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(
       select.widgets.datePicker.input
     );
     thisWidget.initPlugin();
+    //console.log(thisWidget.value);
   }
 
   initPlugin() {
@@ -22,6 +23,7 @@ class DatePicker extends BaseWidget {
       this.minDate,
       settings.datePicker.maxDaysInFuture
     );
+
     //console.log(thisWidget.minDate, thisWidget.maxDate);
     flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
@@ -35,7 +37,12 @@ class DatePicker extends BaseWidget {
           // return true to disable
           return date.getDay() === 1;
         }
-      ]
+      ],
+      onChange: function(selectedDates, dateStr) {
+        //console.log(dateStr);
+        this.value = dateStr;
+        //console.log('this.value', this.value);
+      }
     });
   }
   parseValue(value) {
