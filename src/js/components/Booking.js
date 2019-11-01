@@ -94,7 +94,7 @@ class Booking {
             table.classList.remove('table-change');
           }
           table.classList.add('table-change');
-          thisBooking.changeTable = table.getAttribute('data-table');
+          thisBooking.changeTable = parseInt(table.getAttribute('data-table'));
           //console.log(thisBooking.changeTable);
         } else alert('Stolik zarezerwowany! Wybierz inny bądź zmień datę!');
       });
@@ -113,7 +113,7 @@ class Booking {
         thisBooking.bookingTable(
           thisBooking.changeTable,
           thisBooking.date,
-          thisBooking.hour,
+          thisBooking.hourForPush,
           thisBooking.hoursAmount.value,
           thisBooking.peopleAmount.value,
           thisBooking.starters
@@ -154,7 +154,7 @@ class Booking {
         return res.json();
       })
       .then(parsedRes => console.log(parsedRes));
-    //console.log(booking);
+    thisBooking.getData();
   }
   getData() {
     const thisBooking = this;
@@ -193,7 +193,7 @@ class Booking {
         '?' +
         params.eventsRepeat.join('&')
     };
-    //console.log(urls);
+    // console.log(urls);
     Promise.all([
       fetch(urls.booking),
       fetch(urls.eventsCurrent),
@@ -212,7 +212,7 @@ class Booking {
       .then(function([bookingRes, eventsCurrentRes, eventsRepeatRes]) {
         //console.log('bookingRes', bookingRes);
         // console.log(eventsCurrentRes);
-        //console.log(eventsRepeatRes);
+        // console.log(eventsRepeatRes);
 
         thisBooking.parseData(bookingRes, eventsCurrentRes, eventsRepeatRes);
       });
@@ -220,7 +220,9 @@ class Booking {
 
   parseData(bookings, eventsCurrent, eventsRepeat) {
     const thisBooking = this;
-    //console.log(bookings);
+    // console.log(bookings);
+    // console.log(eventsCurrent);
+    // console.log(eventsRepeat);
     thisBooking.booked = {};
     for (let item of eventsCurrent) {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -229,7 +231,7 @@ class Booking {
     for (let item of bookings) {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
-
+    console.log(thisBooking.booked);
     const minDate = thisBooking.datePicker.minDate;
     const maxDate = thisBooking.datePicker.maxDate;
 
@@ -281,6 +283,7 @@ class Booking {
 
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+    thisBooking.hourForPush = thisBooking.hourPicker.value;
     //console.log('thisBooking.hour', thisBooking.hour);
     //console.log('działa', thisBooking.date);
     let allAvailable = false;
