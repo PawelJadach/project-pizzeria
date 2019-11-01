@@ -13,6 +13,9 @@ class DatePicker extends BaseWidget {
       select.widgets.datePicker.input
     );
     thisWidget.initPlugin();
+    thisWidget.dom.input.addEventListener('input', function() {
+      thisWidget.value = thisWidget.dom.input.value;
+    });
     //console.log(thisWidget.value);
   }
 
