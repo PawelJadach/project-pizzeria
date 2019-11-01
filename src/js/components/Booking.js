@@ -1,5 +1,6 @@
 import { templates, select, settings, classNames } from '../settings.js';
 import AmountWidget from './AmountWidget.js';
+import ArtsWidget from './ArtsWidget.js';
 import utils from '../utils.js';
 import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';
@@ -48,10 +49,14 @@ class Booking {
 
   initWidgets() {
     const thisBooking = this;
-    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+    thisBooking.peopleAmount = new ArtsWidget(thisBooking.dom.peopleAmount);
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+    console.log();
+    thisBooking.hourPicker.dom.wrapper.addEventListener('click', function() {
+      thisBooking.dom.hoursAmount.children[1].value = 0.5;
+    });
     thisBooking.form = document.querySelector('.booking-form');
     thisBooking.starters = [];
     thisBooking.changeTable;
@@ -95,7 +100,43 @@ class Booking {
           }
           table.classList.add('table-change');
           thisBooking.changeTable = parseInt(table.getAttribute('data-table'));
-          //console.log(thisBooking.changeTable);
+
+          let tableReserved = [];
+          Object.keys(thisBooking.booked[thisBooking.date]).map(hour => {
+            //console.log(hour, thisBooking.booked[thisBooking.date][hour]);
+            if (
+              thisBooking.booked[thisBooking.date][hour].includes(
+                thisBooking.changeTable
+              )
+            ) {
+              tableReserved.push(hour);
+            }
+          });
+          //console.log(tableReserved);
+          let closeHour = 24;
+          let flag = false;
+          console.log(thisBooking.hour);
+          tableReserved.map(hour => {
+            if (
+              parseFloat(hour) > parseFloat(thisBooking.hour) &&
+              flag == false
+            ) {
+              closeHour = hour;
+              flag = true;
+            }
+          });
+
+          closeHour -= thisBooking.hour;
+          console.log(thisBooking.hoursAmount.dom.wrapper.children[1]);
+
+          thisBooking.hoursAmount.dom.wrapper.children[1].setAttribute(
+            'max',
+            closeHour
+          );
+
+          for (const key in thisBooking.booked[thisBooking.date]) {
+            //console.log(key);
+          }
         } else alert('Stolik zarezerwowany! Wybierz inny bądź zmień datę!');
       });
     }
@@ -282,6 +323,9 @@ class Booking {
     const thisBooking = this;
 
     thisBooking.date = thisBooking.datePicker.value;
+    // if (utils.hourToNumber(thisBooking.hourPicker.value) != thisBooking.hour) {
+    //   thisBooking.dom.hoursAmount.children[1].setAttribute('value', 0.5);
+    // }
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
     thisBooking.hourForPush = thisBooking.hourPicker.value;
     //console.log('thisBooking.hour', thisBooking.hour);

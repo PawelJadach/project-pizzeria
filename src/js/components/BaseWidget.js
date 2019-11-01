@@ -19,6 +19,11 @@ class BaseWidget {
       thisWidget.correctValue = newValue;
       thisWidget.announce();
     }
+
+    if (newValue < thisWidget.correctValue && newValue > 0) {
+      thisWidget.correctValue = newValue;
+      thisWidget.announce();
+    }
     thisWidget.renderValue();
   }
 
@@ -29,7 +34,7 @@ class BaseWidget {
   }
 
   parseValue(value) {
-    return parseInt(value);
+    return parseFloat(value);
   }
 
   isValid(value) {
