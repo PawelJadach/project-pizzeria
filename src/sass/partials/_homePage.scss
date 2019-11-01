@@ -1,0 +1,225 @@
+section.home {
+  padding: 70px 50px;
+  background-color: #fff;
+  margin-top: 70px;
+  border-radius: $radius;
+
+  .menu {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: 26px;
+    justify-content: space-between;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    // margin-top: 70px;
+
+    .links {
+      position: relative;
+      height: 140px;
+      flex-basis: 49%;
+      //padding: 30px 30px;
+      border-radius: $radius;
+      overflow: hidden;
+
+      &:nth-child(1) {
+        background-image: url('../../assets/pizza-1.jpg');
+      }
+
+      &:nth-child(2) {
+        background-image: url('../../assets/pizza-2.jpg');
+      }
+      p.hover-text {
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+        text-transform: none;
+        font-size: 13px;
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: 0.5s;
+      }
+
+      a.nav-links {
+        padding-top: 50px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        transition: 0.5s;
+      }
+      &:hover > p.hover-text {
+        top: 70%;
+      }
+
+      &:hover > a.nav-links {
+        top: 40%;
+      }
+    }
+
+    .hours {
+      height: 140px;
+      flex-basis: 100%;
+      background-color: #ff6b6c;
+      padding: 30px 50px;
+      margin-top: 10px;
+      border-radius: $radius;
+
+      .data {
+        font-weight: 300;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .carousel {
+    margin-top: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: #333333;
+
+    .img {
+      flex-basis: 32%;
+      border-radius: $radius;
+      background-image: url('');
+      transition: 1s;
+      min-height: 190px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .content {
+      flex-basis: 63%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .title {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: normal;
+        font-family: Oswald;
+        transition: 1s;
+        margin-bottom: -15px;
+      }
+
+      .content {
+        flex-flow: 2;
+        font-size: 14px;
+        font-family: Lato;
+        transition: 1s;
+      }
+
+      .signature {
+        font-size: 14px;
+        font-family: Lato;
+        font-style: italic;
+        font-weight: bold;
+        transition: 1s;
+        margin-top: -10px;
+      }
+    }
+
+    .wheels {
+      margin-top: 35px;
+      flex-basis: 100%;
+      text-align: center;
+
+      i {
+        margin-left: 15px;
+        font-size: 10px;
+        color: #cdcdcd;
+        transition: 1s;
+      }
+
+      .active {
+        color: #333333;
+      }
+    }
+  }
+
+  .gallery {
+    margin-top: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-between;
+
+    div {
+      flex-basis: 32%;
+      height: 200px;
+      margin-bottom: 10px;
+      border-radius: $radius;
+
+      position: relative;
+
+      div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s;
+      }
+    }
+
+    i {
+      color: white;
+      display: none;
+      font-size: 23px;
+      margin-left: 10px;
+      transition: 0.3s;
+
+      &:hover {
+        color: $color-main;
+      }
+    }
+
+    div:hover > div > i {
+      display: inline-block;
+      cursor: pointer;
+    }
+    div:hover > div {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .photo1 {
+      background-image: url('../../assets/pizza-4.jpg');
+    }
+
+    .photo2 {
+      background-image: url('../../assets/pizza-5.jpg');
+    }
+
+    .photo3 {
+      background-image: url('../../assets/pizza-6.jpg');
+    }
+
+    .photo4 {
+      background-image: url('../../assets/pizza-7.jpg');
+    }
+
+    .photo5 {
+      background-image: url('../../assets/pizza-8.jpg');
+    }
+
+    .photo6 {
+      background-image: url('../../assets/pizza-9.jpg');
+    }
+  }
+
+  .insta {
+    color: #ff6b6b;
+  }
+}

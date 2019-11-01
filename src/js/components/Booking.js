@@ -231,7 +231,7 @@ class Booking {
     for (let item of bookings) {
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
-    console.log(thisBooking.booked);
+    //console.log(thisBooking.booked);
     const minDate = thisBooking.datePicker.minDate;
     const maxDate = thisBooking.datePicker.maxDate;
 
