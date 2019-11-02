@@ -1,6 +1,9 @@
 {
   "name": "fer-07-project",
   "version": "1.0.0",
+  "engines": {
+    "node": "12.13.0"
+  },
   "description": "",
   "main": "index.html",
   "scripts": {
