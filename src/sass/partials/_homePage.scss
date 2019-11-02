@@ -30,6 +30,7 @@ section.home {
       &:nth-child(2) {
         background-image: url('../../assets/pizza-2.jpg');
       }
+
       p.hover-text {
         margin: 0;
         padding: 0;
@@ -56,6 +57,7 @@ section.home {
         height: 100%;
         transition: 0.5s;
       }
+
       &:hover > p.hover-text {
         top: 70%;
       }
@@ -190,6 +192,7 @@ section.home {
       display: inline-block;
       cursor: pointer;
     }
+
     div:hover > div {
       background-color: rgba(0, 0, 0, 0.5);
     }
