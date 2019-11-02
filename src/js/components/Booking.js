@@ -134,9 +134,9 @@ class Booking {
             closeHour
           );
 
-          for (const key in thisBooking.booked[thisBooking.date]) {
-            //console.log(key);
-          }
+          // for (const key in thisBooking.booked[thisBooking.date]) {
+          //   //console.log(key);
+          // }
         } else alert('Stolik zarezerwowany! Wybierz inny bądź zmień datę!');
       });
     }
